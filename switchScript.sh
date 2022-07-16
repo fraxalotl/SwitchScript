@@ -6,8 +6,19 @@
 # -------------------------------------------
 
 ### Install jq if not already installed
-brew install jq
-
+if [[ "$OSTYPE" == "msys" ]]; then
+  # Windows
+  @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+  chocolatey install jq
+elif [[ "$OSTYpe" == "darwin" ]]; then
+  # MacOS
+  brew install jq
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # linux
+  sudo apt-get install jq
+else
+  #Unknown
+  
 ### Fetch latest Hekate + Nyx from https://github.com/CTCaer/hekate/releases/latest/
 curl -s https://api.github.com/repos/CTCaer/hekate/releases/latest | jq -r ".assets[] | select(.name | te
 st(\"hekate_ctcaer\")) | .browser_download_url"
