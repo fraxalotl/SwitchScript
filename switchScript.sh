@@ -20,16 +20,19 @@ else
   #Unknown
   
 ### Fetch latest Hekate + Nyx from https://github.com/CTCaer/hekate/releases/latest/
-curl -s https://api.github.com/repos/CTCaer/hekate/releases/latest | jq -r ".assets[] | select(.name | te
-st(\"hekate_ctcaer\")) | .browser_download_url"
+curl -sL https://api.github.com/repos/CTCaer/hekate/tags \
+  | jq -r '.[0].zipball_url' \
+  | xargs -I {} curl -sL {} -o Hekate.zip
 
-### Fetch latest atmosphere + fusee.bin from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
-curl -s https://api.github.com/repos/Atmosphere-NX/Atmosphere/releases/latest | jq -r ".assets[] | select(.name | te
-st(\"hekate_ctcaer\")) | .browser_download_url"
+### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
+curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/tags \
+  | jq -r '.[0].zipball_url' \
+  | xargs -I {} curl -sL {} -o Atmosphere.zip
 
 ### Fetch latest SigPatches.zip from https://github.com/ITotalJustice/patches/releases/latest
-curl -s https://api.github.com/repos/ITotalJustice/patches/releases/latest | jq -r ".assets[] | select(.name | te
-st(\"hekate_ctcaer\")) | .browser_download_url"
+curl -sL https://api.github.com/repos/ITotalJustice/patches/tags \
+  | jq -r '.[0].zipball_url' \
+  | xargs -I {} curl -sL {} -o SigPatches.zip
 
 # -------------------------------------------
 
