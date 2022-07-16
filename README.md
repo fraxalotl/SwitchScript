@@ -3,6 +3,7 @@
 
 ### A simple script to kickstart your Nintendo Switch SD card for Homebrew
 
+CURRENTLY NOT WORKING
 
 This script is designed to:
 
