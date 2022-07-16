@@ -34,7 +34,10 @@ st(\"hekate_ctcaer\")) | .browser_download_url"
 # -------------------------------------------
 
 ### Place fusee.bin in /bootloader/payloads/
-mv fusee.bin /bootloader/payloads
+if [[ "$OSTYPE" == "msys" ]]; then
+  move fusee.bin /bootloader/payloads
+else
+  mv fusee.bin /bootloader/payloads
 
 # -------------------------------------------
 
