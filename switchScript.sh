@@ -16,35 +16,43 @@ elif [[ "$OSTYpe" == "darwin" ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # linux
   sudo apt-get install jq
-else
-  #Unknown
+fi
   
 ### Fetch latest Hekate + Nyx from https://github.com/CTCaer/hekate/releases/latest/
+echo Downloading Hekate...
 curl -sL https://api.github.com/repos/CTCaer/hekate/tags \
   | jq -r '.[0].zipball_url' \
-  | xargs -I {} curl -sL {} -o Hekate.zip
+  | xargs -I {} curl -sL {} -o hekate.zip
+echo Done!
 
 ### Fetch latest atmosphere from https://github.com/Atmosphere-NX/Atmosphere/releases/latest
 curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/tags \
   | jq -r '.[0].zipball_url' \
-  | xargs -I {} curl -sL {} -o Atmosphere.zip
+  | xargs -I {} curl -sL {} -o atmosphere.zip
+echo Done!
 
 ### Fetch latest SigPatches.zip from https://github.com/ITotalJustice/patches/releases/latest
-curl -sL https://sigmapatches.coomer.party/sigpatches.zip -o SigPatches.zip
+echo Downloading Sigpatches...
+curl -sL https://jits.cc/patches -o sigpatches.zip;
+echo Done!
 
 # -------------------------------------------
 
 ### Unzip Downloaded Packages
 
-unzip Hekate.zip
-unzip Atomsphere.zip
-unzip SigPatches.zip
+echo Unzipping Zips...
+unzip -u hekate.zip
+unzip -u atomsphere.zip
+unzip -u sigpatches.zip
+echo Done!
 
 ### Cleanup Downloaded Zips
 
-rm Hekate.zip
-rm Atmosphere.zip
-rm SigPatches.zip
+echo Cleaning up...
+rm hekate.zip
+rm atmosphere.zip
+rm sigpatches.zip
+echo Done!
 
 
 ### Place fusee.bin in /bootloader/payloads/
@@ -56,6 +64,7 @@ else
 # -------------------------------------------
 
 ### Write hekate_ipl.ini in /bootloader/ directory
+echo Writing hekate_ipl.ini in /bootloader/ directory...
 mkdir -p /bootloader
 cat > /bootloader/hekate_ipl.ini << ENDOFFILE
 [config]
@@ -78,10 +87,12 @@ stock=1
 emummc_force_disable=1
 icon=bootloader/res/icon_switch.bmp
 ENDOFFILE
+echo Done!
 
 # -------------------------------------------
 
 ### write exosphere.ini in root of SD Card
+echo Writing exosphere.ini in root of SD card...
 cat > /exosphere.ini << ENDOFFILE
 [exosphere]
 debugmode=1
@@ -95,10 +106,12 @@ log_port=0
 log_baud_rate=115200
 log_inverted=0
 ENDOFFILE
+echo Done!
 
 # -------------------------------------------
 
 ### Write default.txt in /atmosphere/hosts
+echo Writing default.txt in /atmosphere/hosts
 mkdir -p /atmosphere/hosts
 cat > /atmosphere/hosts/default.txt << ENDOFFILE
 # Block Nintendo Servers
@@ -108,5 +121,8 @@ cat > /atmosphere/hosts/default.txt << ENDOFFILE
 95.216.149.205 *conntest.nintendowifi.net
 95.216.149.205 *ctest.cdn.nintendo.net
 ENDOFFILE
+echo Done!
 
 # -------------------------------------------
+
+echo Your Switch SD card is prepared!
