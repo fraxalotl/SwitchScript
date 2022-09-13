@@ -30,11 +30,22 @@ curl -sL https://api.github.com/repos/Atmosphere-NX/Atmosphere/tags \
   | xargs -I {} curl -sL {} -o Atmosphere.zip
 
 ### Fetch latest SigPatches.zip from https://github.com/ITotalJustice/patches/releases/latest
-curl -sL https://api.github.com/repos/ITotalJustice/patches/tags \
-  | jq -r '.[0].zipball_url' \
-  | xargs -I {} curl -sL {} -o SigPatches.zip
+curl -sL https://sigmapatches.coomer.party/sigpatches.zip -o SigPatches.zip
 
 # -------------------------------------------
+
+### Unzip Downloaded Packages
+
+unzip Hekate.zip
+unzip Atomsphere.zip
+unzip SigPatches.zip
+
+### Cleanup Downloaded Zips
+
+rm Hekate.zip
+rm Atmosphere.zip
+rm SigPatches.zip
+
 
 ### Place fusee.bin in /bootloader/payloads/
 if [[ "$OSTYPE" == "msys" ]]; then
