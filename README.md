@@ -13,7 +13,7 @@ This script is designed to:
 - Download the latest:
   - `Hekate + Nyx` [From Here](https://github.com/CTCaer/hekate/releases/latest/)
   - `Atmosphere + Fusee` [From Here](https://github.com/Atmosphere-NX/Atmosphere/releases/latest)
-  - `SigPatches` [From Here](https://sigmapatches.coomer.party/)
+  - `SigPatches` [From Jits.cc](https://jits.cc/patches)
 - Place `fusee.bin` in  `/bootloader/payloads`
 - Create `hekate_ipl.ini` in `/bootloader`
 - Create `exosphere.ini` in your root folder
