@@ -10,13 +10,13 @@ if [[ "$OSTYPE" == "msys" ]]; then
   # Windows
   @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
   chocolatey install jq
-elif [[ "$OSTYpe" == "darwin" ]]; then
+elif [[ "$OSTYPE" == "darwin" ]]; then
   # MacOS
   brew install jq
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # linux
   sudo apt-get install jq
-fi
+fi;
   
 ### Fetch latest Hekate + Nyx from https://github.com/CTCaer/hekate/releases/latest/
 echo Downloading Hekate...
@@ -60,6 +60,7 @@ if [[ "$OSTYPE" == "msys" ]]; then
   move fusee.bin /bootloader/payloads
 else
   mv fusee.bin /bootloader/payloads
+fi;
 
 # -------------------------------------------
 
